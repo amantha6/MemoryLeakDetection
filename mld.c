@@ -135,6 +135,24 @@ xcalloc(object_db_t *object_db,
     return ptr;
 }
 
+/* Function to get the previous record in the object database */
+static object_db_rec_t *
+pre_object_db_rec_fn(object_db_t *object_db, object_db_rec_t *object_db_rec) {
+    object_db_rec_t *head = object_db->head;
+
+    if (head == object_db_rec) {
+        return NULL;  // No previous record for the head of the list
+    }
+
+    while (head) {
+        if (head->next == object_db_rec) {
+            return head;
+        }
+        head = head->next;
+    }
+
+    return NULL;  // Return NULL if not found
+}
 
 /*Dumping Functions for Object database*/
 void 
@@ -267,23 +285,6 @@ void mld_dump_object_rec_detail(object_db_rec_t *object_db_rec,const char *struc
 
   }
 
-}
-static object_db_rec_t *
-pre_object_db_rec_fn(object_db_t *object_db, object_db_rec_t *object_db_rec) {
-    object_db_rec_t *head = object_db->head;
-
-    if (head == object_db_rec) {
-        return NULL;  // No previous record for the head of the list
-    }
-
-    while (head) {
-        if (head->next == object_db_rec) {
-            return head;
-        }
-        head = head->next;
-    }
-
-    return NULL;  // Return NULL if not found
 }
 
 void xfree(object_db_t *object_db, void *ptr) { // Updated signature
