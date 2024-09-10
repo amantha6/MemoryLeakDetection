@@ -33,3 +33,42 @@ The main goal of Phase 1 is to design and implement the MLD Database to facilita
 
 ### Summary
 Phase 1 lays the groundwork for the MLD project's comprehensive memory leak detection capabilities by establishing a detailed and searchable database of all structures used within the application. This database is crucial for the subsequent phases that focus on tracking memory allocations and detecting leaks based on the information collected in this initial phase.
+
+Memory Layout Descriptor (MLD) Library
+======================================
+
+Overview
+--------
+The Memory Layout Descriptor (MLD) Library is designed to track and manage dynamically allocated memory within applications. It provides a detailed tracking system for all memory allocations, ensuring efficient management and aiding in debugging and memory leak prevention.
+
+Key Features
+------------
+1. Object Tracking:
+   - The library records details of every dynamic allocation (malloc), including the memory address and associated metadata.
+
+2. Object Database Modelling:
+   - Manages an object database with records for each dynamically allocated object.
+   - Each record includes the object's pointer, the number of units allocated, a link to the next object, and a reference to the structure definition.
+
+3. Custom Memory Allocation:
+   - Introduces 'xcalloc', a custom function for allocating memory while updating the object database.
+   - Usage: void* xcalloc(object_db_t *object_db, char *struct_name, int units);
+
+4. Dumping Functions:
+   - Provides functions to dump the contents of the object database, displaying detailed information about each object to aid in debugging and identifying memory leaks.
+
+Usage Example
+-------------
+To allocate memory for a student_t object:
+   student_t *aditi = xcalloc(object_db, "student_t", 1);
+
+Benefits
+--------
+- Enhanced Debugging: Tracks all dynamic allocations, aiding in quick identification and resolution of memory-related issues.
+- Improved Memory Management: Simplifies memory operations, making code cleaner and more robust.
+- Leak Detection: Helps identify unreleased memory, preventing leaks and ensuring efficient resource use.
+
+Conclusion
+----------
+Phase 2 of the MLD library development focuses on providing robust memory tracking and management capabilities essential for developing high-reliability applications. The library's features not only aid in debugging but also enhance overall application performance by ensuring effective resource utilization.
+
