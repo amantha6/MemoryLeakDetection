@@ -1,25 +1,35 @@
-# MemoryLeakDetection
-Memory Leak Detection 
-Overview
-Phase 1 of the Memory Leak Detection (MLD) project focuses on developing a structure database to maintain all structures used by the application. This foundational step is crucial for the effective detection of memory leaks in C and C++ programs, as it allows the MLD library to keep track of all memory allocations and relations between different data structures.
+## Phase 1: Structure Database Development
 
-Objective
-The primary goal of Phase 1 is to design and implement the MLD Database, which is tasked with the structural registration of every data structure used by the application. This registration process ensures that the MLD library has comprehensive knowledge of each structure's layout, facilitating the detection and prevention of memory leaks.
+### Overview
+Phase 1 of the Memory Leak Detection (MLD) project is centered on the development of a structure database that maintains records of all structures utilized by an application. This database is essential for the detection and management of memory leaks in C and C++ programs.
 
-Key Components
-Structure Database (Structure DB): A linked list that stores metadata about each registered structure, such as its name, size, number of fields, and detailed information about each field.
-Field Information (field_info_t): Describes individual fields within a structure, including field name, data type, size, and offset.
-Structure Record (struct_db_rec_t): Contains the metadata for a particular structure, forming an element in the Structure DB.
-Development Tools
-Environment: Linux/Unix OS, which supports the necessary tools and libraries.
-Compiler: gcc, used to compile the application and ensure compatibility with the MLD library.
-Functions and Macros
-struct_db_look_up: Retrieves a structure record from the Structure DB using the structure's name as a key. If the record is not found, returns NULL.
-print_structure_rec and print_structure_db: Debugging functions used to print the contents of the Structure DB, facilitating verification and inspection.
-add_structure_to_struct_db: Integrates a new structure record into the Structure DB.
-Implementation Details
-Structure Registration: At the initialization phase, the application provides detailed information about each structure it uses, including field names, data types, and other relevant metadata.
-Macros:
-FIELD_INFO: Aids in defining metadata for each field within a structure.
-REG_STRUCT: Automates the registration of structures with the Structure DB, ensuring all necessary information is captured efficiently.
-Data Handling: Maintains a detailed enumeration for field types, which helps in identifying and managing different data types within the registered structures.
+### Objective
+The main goal of Phase 1 is to design and implement the MLD Database to facilitate the structural registration of data structures used by the application. This foundational database enables the MLD library to monitor each structure's memory allocation and relationships comprehensively.
+
+### Key Components
+- **Structure Database (Structure DB)**: A linked list database storing metadata about each structure, including its name, size, fields, and more.
+- **Field Information (`field_info_t`)**: Structs that define detailed information about each field within a structure, such as name, data type, size, and offset.
+- **Structure Record (`struct_db_rec_t`)**: Represents a record in the Structure DB, containing comprehensive metadata about a specific structure.
+
+### Development Tools
+- **Operating System**: Linux/Unix, providing the necessary environment for development and execution.
+- **Compiler**: gcc, which compiles the C/C++ code ensuring compatibility and performance.
+
+### Functions and Macros
+- **`struct_db_look_up`**: Searches for and retrieves a structure record by name from the Structure DB. Returns `NULL` if no record is found.
+- **`print_structure_rec`** and **`print_structure_db`**: Functions used to output the contents of the Structure DB, valuable for debugging and verification.
+- **`add_structure_to_struct_db`**: Adds a new structure record to the Structure DB, expanding the database with new structural information.
+
+### Implementation Details
+- **Structure Registration**: Critical at the initialization phase where the application provides details about each structure it employs.
+- **Macros**:
+  - **`FIELD_INFO`**: Simplifies the definition of field metadata within a structure.
+  - **`REG_STRUCT`**: Facilitates the registration of structures to the Structure DB, ensuring efficient and complete data capture.
+- **Data Handling**: Includes detailed enumeration for identifying various field types within the structures, enhancing data management and accessibility.
+
+### Example Implementation
+- Structures such as `emp_t` are registered detailing fields like `emp_name`, `emp_id`, `age`, `mgr`, and `salary`. Each field's metadata including size and offset is meticulously recorded.
+- The C application must initialize and populate the Structure DB accurately using the macros and functions provided by the MLD library.
+
+### Summary
+Phase 1 lays the groundwork for the MLD project's comprehensive memory leak detection capabilities by establishing a detailed and searchable database of all structures used within the application. This database is crucial for the subsequent phases that focus on tracking memory allocations and detecting leaks based on the information collected in this initial phase.
