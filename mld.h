@@ -1,6 +1,9 @@
 #ifndef __MLD__
+#define __MLD__
+
 #include <assert.h>
-#include<stdint.h>
+#include <string.h>  // Add this include to resolve implicit declaration of strncmp
+
 /*Structure Data base Definition Begin*/
 
 #define MAX_STRUCTURE_NAME_SIZE 128
@@ -18,9 +21,8 @@ typedef enum {
     OBJ_STRUCT
 } data_type_t;
 
-#define OFFSETOF(struct_name, fld_name) \
-    ((uintptr_t)&(((struct_name *)0)->fld_name))
-
+#define OFFSETOF(struct_name, fld_name)     \
+    (unsigned long)&(((struct_name *)0)->fld_name) // Changed cast to unsigned long
 
 #define FIELD_SIZE(struct_name, fld_name)   \
     sizeof(((struct_name *)0)->fld_name)
@@ -91,6 +93,16 @@ add_structure_to_struct_db(struct_db_t *struct_db, struct_db_rec_t *struct_rec);
 
 /*Structure Data base Definition Ends*/
 
+
+
+
+
+
+
+
+
+
+
 /*Object Database structure definitions Starts here*/
 
 typedef struct _object_db_rec_ object_db_rec_t;
@@ -116,7 +128,9 @@ print_object_rec(object_db_rec_t *obj_rec, int i);
 void
 print_object_db(object_db_t *object_db);
 
+void mld_dump_object_rec_detail(object_db_rec_t *obj_rec, const char *struct_ptr_name); // Updated to include the second argument
 
+void xfree(object_db_t *object_db, void *ptr); // Updated signature to match the implementation
 
 /*API to malloc the object*/
 void*
