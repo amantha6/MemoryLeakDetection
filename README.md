@@ -59,7 +59,7 @@ Initialization: Marks all objects as unvisited.
 Graph Traversal: Traverses from root objects, marking all reachable objects.
 Leak Identification: Objects that remain marked as unvisited are identified as leaks.
 ## Example
-Assuming an object aditi is designated as a root, the system will traverse all objects linked to aditi, marking them as visited. Objects not visited after this traversal are reported as leaks.
+Assuming an object JohnDoe is designated as a root, the system will traverse all objects linked to aditi, marking them as visited. Objects not visited after this traversal are reported as leaks.
 
 ## Conclusion
 The MLD Library integrates several phases to provide a robust framework for memory tracking, management, and leak detection, vital for developing reliable applications. Its features not only aid in debugging but also improve application performance by ensuring efficient resource utilization.
